@@ -7,6 +7,8 @@ from config import (
 )
 from init import reciever_socket
 
+# SERVER
+
 def setup(receiver_socket, host, port):
 
     '''
@@ -30,9 +32,9 @@ def setup(receiver_socket, host, port):
 
 def update(conn):
 
-    # Received a message to the server
+    # Received a message 
     message = conn.recv(message_size)
-    # Send the acknowledgement to the server
+    # Send the acknowledgement 
     acknowledgement = "Message Recieved!"
     conn.send(acknowledgement.encode())
 
@@ -50,7 +52,10 @@ def run():
 
     while True:
 
-        update(conn)
+        try:
+            update(conn)
+        except Exception as e:
+            print("Exception as {e}")
 
 if __name__ == "__main__":
     run()
